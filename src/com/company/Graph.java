@@ -96,6 +96,8 @@ public class Graph {
         }
     }
     void findAllRoot(){
+        /* Su dung thuat toan tarjan
+            Do phuc tạp O(V + E) */
         SCC = 0;
         int time = 0;
         for(Vertice verticea : verticeList){
@@ -119,10 +121,13 @@ public class Graph {
         for(Vertice vertice1 : vertice.adjVertice) {
             if ((!vertice1.hasExplored) && (vertice1.active)) {
                 markRoot(vertice1, time);
+                vertice.low = min(vertice1.low, vertice.low);
+                //Neu vertice1 chua duoc tham, de quy tham no
             }
             else {
+                //Neu da duoc tham, chinh lai gia tri vertice.low
                 if(vertice1.active) {
-                    vertice.low = min(vertice1.low, vertice.low);
+                    vertice.low = min(vertice1.disc, vertice.low);
                 }
             }
         }

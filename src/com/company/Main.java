@@ -12,7 +12,7 @@ public class Main {
 
         Graph graph = new Graph(file);
         graph.findAllRoot();
-        System.out.println("So thanh phan lien thong manh la : " + graph.SCC);
+       System.out.println("So thanh phan lien thong manh la : " + graph.SCC);
         Scanner sc = new Scanner(System.in);
 
 
@@ -28,5 +28,6 @@ public class Main {
         String b = sc.nextLine();
 
         graph.FindWay(a,b);
+
     }
 }
