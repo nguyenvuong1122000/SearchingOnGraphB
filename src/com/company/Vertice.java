@@ -8,7 +8,7 @@ public class Vertice {
     boolean active = true;
     int disc;
     int SCC;
-    boolean inS = false;
+    boolean inS ;
     boolean hasExplored;
     String name;
     LinkedList<Vertice> adjVertice = new LinkedList<>() ;

@@ -22,7 +22,7 @@ public class Graph {
                 }
             for(Vertice vertice : verticeList) {
                 for(Vertice i : verticeList){
-                    if((checkEdge(vertice,i)) && (i != vertice) ){
+                    if((checkEdge(vertice,i))){
                         addEgde(vertice,i);
                     }
                 }
@@ -98,6 +98,9 @@ public class Graph {
     void findAllRoot(){
         /* Su dung thuat toan tarjan
             Do phuc tạp O(V + E) */
+        for(Vertice vertice : verticeList){
+            vertice.inS = false;
+        }
         SCC = 0;
         int time = 0;
         for(Vertice verticea : verticeList){
@@ -117,7 +120,6 @@ public class Graph {
         time = time +1;
         vertice.disc = time;
         vertice.low = vertice.disc;
-        vertice.inS = true;
         for(Vertice vertice1 : vertice.adjVertice) {
             if ((!vertice1.hasExplored) && (vertice1.active)) {
                 markRoot(vertice1, time);
@@ -126,15 +128,16 @@ public class Graph {
             }
             else {
                 //Neu da duoc tham, chinh lai gia tri vertice.low
-                if(vertice1.active) {
+                if((vertice1.active)) {
                     vertice.low = min(vertice1.disc, vertice.low);
+
                 }
             }
         }
-        if ((vertice.low == vertice.disc)){
+        if (vertice.low == vertice.disc){
             //neu vertice la goc cua thanh phan lien thong manh
             SCC++;
-            while (verticeStack.peek() !=vertice){
+            while (verticeStack.peek() != vertice){
                 Vertice vertice2 =verticeStack.pop();
                 vertice2.active = false; // xoa bo v2
                 vertice2.SCC = SCC;
@@ -142,17 +145,15 @@ public class Graph {
             Vertice v3 = verticeStack.pop();
             v3.active = false; // xoa bo v3
             v3.SCC = SCC;
+
         }
     }
     void printSCC(Vertice vertice){
-        int count = 0;
         for(Vertice v1 : verticeList){
             if(v1.SCC == vertice.SCC){
                 System.out.print(v1.name + " ");
-                count++;
             }
         }
-
     }
 }
 
