@@ -11,20 +11,22 @@ public class Main {
         File file = new File(System.getProperty("user.dir") + "/INPUT//sgb-words.txt");
 
         Graph graph = new Graph(file);
-        System.out.println("So thanh phan lien thong manh la  " + graph.SCC);
-       System.out.println("Nhap 2 tu de thuc hien tim duong ");
+        graph.findAllRoot();
+        System.out.println("So thanh phan lien thong manh la : " + graph.SCC);
         Scanner sc = new Scanner(System.in);
+
+
+        System.out.println("Nhap mot tu");
+        String c = sc.nextLine();
+        System.out.println("Thanh phan lien thong voi no la ");
+        graph.printSCC(graph.verticeMap.get(c));
+
+
+        System.out.println("\nNhap 2 tu de thuc hien tim duong ");
+
         String a = sc.nextLine();
         String b = sc.nextLine();
+
         graph.FindWay(a,b);
-
-        System.out.println("Nhap 2 tu de kiem tra co cung nam trong mot \n thanh phan lien thong manh hay ko");
-        String c =sc.nextLine();
-        String d = sc.nextLine();
-        sc.close();
-
-        graph.findAllRoot();
-        System.out.println(graph.check(graph.verticeMap.get(c),graph.verticeMap.get(d)));
-
     }
 }

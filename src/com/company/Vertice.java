@@ -5,12 +5,10 @@ import java.util.LinkedList;
 public class Vertice {
     Vertice parent;
     int low;
+    boolean active = true;
     int disc;
-
     int SCC;
-    int previsit;
-    int postvisit;
-    int ccnum;
+    boolean inS = false;
     boolean hasExplored;
     String name;
     LinkedList<Vertice> adjVertice = new LinkedList<>() ;

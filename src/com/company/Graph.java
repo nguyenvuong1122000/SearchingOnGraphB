@@ -5,7 +5,7 @@ import java.util.*;
 import static com.company.Vertice.*;
 
 public class Graph {
-    int SCC,time;
+    int SCC=0,time;
     LinkedList<Vertice> verticeList = new LinkedList<>();
     Map<String, Vertice> verticeMap = new HashMap<>();
     Queue<Vertice> verticeQueue = new LinkedList<>();
@@ -100,40 +100,54 @@ public class Graph {
         int time = 0;
         for(Vertice verticea : verticeList){
             verticea.hasExplored = false;
+            verticea.active = true;
         }
         for(Vertice vertice : verticeList){
-            if (vertice.hasExplored == false){
-                markRoot(vertice);
+            if ((!vertice.hasExplored)&&(vertice.active)){
+                verticeStack.removeAllElements();
+                markRoot(vertice,time);
             }
         }
     }
-    void markRoot(Vertice vertice ){
+    void markRoot(Vertice vertice,int time ){
         vertice.hasExplored = true;
         verticeStack.push(vertice);
         time = time +1;
         vertice.disc = time;
         vertice.low = vertice.disc;
-        for(Vertice vertice1 : vertice.adjVertice){
-           if(vertice1.hasExplored = false){
-               markRoot(vertice1);
-           }
-           vertice.low = min(vertice1.low,vertice.low);
-        }
-
-        if (vertice.low == vertice.disc){
-            SCC++;
-            LinkedList<Vertice> list = new LinkedList<>();
-            while (verticeStack.peek() !=vertice){
-                verticeStack.pop().SCC = SCC;
+        vertice.inS = true;
+        for(Vertice vertice1 : vertice.adjVertice) {
+            if ((!vertice1.hasExplored) && (vertice1.active)) {
+                markRoot(vertice1, time);
+            }
+            else {
+                if(vertice1.active) {
+                    vertice.low = min(vertice1.low, vertice.low);
+                }
             }
         }
-    }
-    boolean check(Vertice vertice1, Vertice vertice2){
-        findAllRoot();
-        if (vertice1.SCC == vertice2.SCC){
-            return true;
+        if ((vertice.low == vertice.disc)){
+            //neu vertice la goc cua thanh phan lien thong manh
+            SCC++;
+            while (verticeStack.peek() !=vertice){
+                Vertice vertice2 =verticeStack.pop();
+                vertice2.active = false; // xoa bo v2
+                vertice2.SCC = SCC;
+            }
+            Vertice v3 = verticeStack.pop();
+            v3.active = false; // xoa bo v3
+            v3.SCC = SCC;
         }
-        return false;
+    }
+    void printSCC(Vertice vertice){
+        int count = 0;
+        for(Vertice v1 : verticeList){
+            if(v1.SCC == vertice.SCC){
+                System.out.print(v1.name + " ");
+                count++;
+            }
+        }
+
     }
 }
 
