@@ -24,7 +24,7 @@ public class Main {
         graph.printSCC(graph.verticeMap.get(c));
 
 
-        System.out.println("\nNhap 2 tu de thuc hien tim duong ");
+        System.out.println("\nNhap 2 tu de thuc hien tim duong : ");
 
         String a = sc.nextLine();
         String b = sc.nextLine();

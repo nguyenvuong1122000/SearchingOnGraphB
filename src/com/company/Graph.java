@@ -130,7 +130,6 @@ public class Graph {
                 //Neu da duoc tham, chinh lai gia tri vertice.low
                 if((vertice1.active)) {
                     vertice.low = min(vertice1.disc, vertice.low);
-
                 }
             }
         }
